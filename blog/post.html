@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog — Nishim Goyal</title>
+  <link rel="stylesheet" href="../assets/matrix.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+</head>
+<body>
+  <canvas id="rain"></canvas>
+
+  <main class="page">
+    <p><a class="back-link" href="./">&lt; all posts</a></p>
+    <article id="content"><p>loading...</p></article>
+  </main>
+
+  <script src="../assets/rain.js"></script>
+  <script src="posts.js"></script>
+  <script>
+    const slug = new URLSearchParams(location.search).get("p");
+    const post = POSTS.find((p) => p.slug === slug);
+    const content = document.getElementById("content");
+
+    if (!post) {
+      content.innerHTML = "<h1>404</h1><p>there is no post. only the matrix.</p>";
+    } else {
+      document.title = post.title + " — Nishim Goyal";
+      fetch("posts/" + post.slug + ".md")
+        .then((res) => {
+          if (!res.ok) throw new Error("not found");
+          return res.text();
+        })
+        .then((md) => {
+          content.innerHTML =
+            "<h1>" + post.title + "</h1>" +
+            '<p class="post-date">' + post.date + "</p>" +
+            marked.parse(md);
+        })
+        .catch(() => {
+          content.innerHTML = "<h1>404</h1><p>post file missing: posts/" + post.slug + ".md</p>";
+        });
+    }
+  </script>
+</body>
+</html>

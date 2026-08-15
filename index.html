@@ -3,47 +3,45 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your Name</title>
-  <meta name="description" content="Personal website of Your Name.">
-  <style>
-    body {
-      max-width: 36rem;
-      margin: 6rem auto;
-      padding: 0 1.5rem;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #1a1a1a;
-      background: #ffffff;
-    }
-    h1 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin: 0 0 1.5rem;
-    }
-    p {
-      margin: 0 0 2rem;
-    }
-    nav a {
-      color: #1a1a1a;
-      margin-right: 1.25rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      body { color: #e6e6e6; background: #111111; }
-      nav a { color: #e6e6e6; }
-    }
-  </style>
+  <title>Nishim Goyal</title>
+  <meta name="description" content="Personal website of Nishim Goyal.">
+  <link rel="stylesheet" href="assets/matrix.css">
 </head>
 <body>
-  <h1>Your Name</h1>
-  <p>
-    A sentence or two about what you care about and what you're working on.
-    Keep it short — this is the whole site.
-  </p>
-  <nav>
-    <a href="https://github.com/yourusername">GitHub</a>
-    <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
-    <a href="https://x.com/yourusername">X</a>
-  </nav>
+  <canvas id="rain"></canvas>
+
+  <a class="corner-link" href="blog/">Blog</a>
+
+  <main>
+    <h1><span id="typed"></span><span class="cursor"></span></h1>
+    <div class="bio">
+      <p><span class="label">Currently:</span> Software Engineer at Ixana, building AI-powered tools for the chip design industry.</p>
+      <p><span class="label">Previously:</span> Intern at Nethermind, OSS contributor to Uniswap V4.</p>
+      <p><span class="label">Interested in:</span> AI, Web3 (not so much now), and defense technology.</p>
+      <p><span class="label">Passionate about:</span> movies, music and books.</p>
+      <p><span class="label">Education:</span> IIT Kharagpur, Class of 2025.</p>
+      <p><span class="label">Location:</span> Bangalore, India.</p>
+    </div>
+    <nav>
+      <a href="https://github.com/nishim3">GitHub</a>
+      <a href="https://linkedin.com/in/nishimgoyal">LinkedIn</a>
+      <a href="https://x.com/nishimgoyal">X</a>
+    </nav>
+  </main>
+
+  <footer>wake up, neo...</footer>
+
+  <script src="assets/rain.js"></script>
+  <script>
+    const NAME = "Nishim Goyal";
+    const typed = document.getElementById("typed");
+    let i = 0;
+    (function type() {
+      if (i <= NAME.length) {
+        typed.textContent = NAME.slice(0, i++);
+        setTimeout(type, 90 + Math.random() * 80);
+      }
+    })();
+  </script>
 </body>
 </html>

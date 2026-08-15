@@ -1,0 +1,266 @@
+:root {
+  --green: #00ff41;
+  --green-dim: #00b32d;
+  --green-dark: #003b00;
+  --bg: #000000;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--green);
+  font-family: "SF Mono", "Fira Code", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+
+/* Digital rain sits behind everything */
+#rain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+/* CRT scanlines + vignette over the whole page */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.25) 0px,
+      rgba(0, 0, 0, 0.25) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 22vh 1.5rem 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.55);
+}
+
+/* Blog pages start higher so there's room to read */
+main.page {
+  padding-top: 10vh;
+  padding-bottom: 4rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 1.75rem;
+  text-transform: uppercase;
+}
+
+/* Blinking block cursor */
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  margin-left: 0.15em;
+  vertical-align: text-bottom;
+  background: var(--green);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+p { margin: 0 0 2.5rem; }
+
+/* Bio lines on the homepage */
+.bio {
+  margin: 0 0 2.5rem;
+}
+
+.bio p {
+  margin: 0 0 0.65rem;
+}
+
+.bio .label {
+  color: var(--green-dim);
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--green);
+  text-decoration: none;
+  border: 1px solid var(--green-dark);
+  padding: 0.45rem 0.9rem;
+  transition: all 0.15s ease;
+}
+
+nav a::before {
+  content: "> ";
+  color: var(--green-dim);
+}
+
+nav a:hover {
+  background: var(--green);
+  color: #000;
+  border-color: var(--green);
+  box-shadow: 0 0 18px rgba(0, 255, 65, 0.8);
+  text-shadow: none;
+}
+
+nav a:hover::before { color: #000; }
+
+/* Pinned link in the top-right corner */
+.corner-link {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.75rem;
+  z-index: 1;
+  color: var(--green);
+  text-decoration: none;
+  border: 1px solid var(--green-dark);
+  padding: 0.45rem 0.9rem;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.55);
+  transition: all 0.15s ease;
+}
+
+.corner-link::before {
+  content: "> ";
+  color: var(--green-dim);
+}
+
+.corner-link:hover {
+  background: var(--green);
+  color: #000;
+  border-color: var(--green);
+  box-shadow: 0 0 18px rgba(0, 255, 65, 0.8);
+  text-shadow: none;
+}
+
+.corner-link:hover::before { color: #000; }
+
+footer {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+  margin: 4rem auto 0;
+  padding: 0 1.5rem 2rem;
+  font-size: 0.75rem;
+  color: var(--green-dark);
+}
+
+/* ---- Blog list ---- */
+.back-link {
+  color: var(--green-dim);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.back-link:hover { color: var(--green); }
+
+ul.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.post-list li {
+  margin: 0 0 1.1rem;
+}
+
+ul.post-list .post-date {
+  color: var(--green-dim);
+  font-size: 0.85rem;
+  margin-right: 1rem;
+}
+
+ul.post-list a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+ul.post-list a::before {
+  content: "> ";
+  color: var(--green-dim);
+}
+
+ul.post-list a:hover {
+  text-decoration: underline;
+  text-shadow: 0 0 14px rgba(0, 255, 65, 0.9);
+}
+
+/* ---- Rendered markdown article ---- */
+article .post-date {
+  color: var(--green-dim);
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+article h1, article h2, article h3 {
+  color: var(--green);
+  letter-spacing: 0.05em;
+}
+
+article h2 { font-size: 1.25rem; margin: 2.5rem 0 1rem; }
+article h3 { font-size: 1.05rem; margin: 2rem 0 0.75rem; }
+
+article p { margin: 0 0 1.25rem; }
+
+article a {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+article a:hover { text-shadow: 0 0 14px rgba(0, 255, 65, 0.9); }
+
+article code {
+  background: rgba(0, 255, 65, 0.08);
+  border: 1px solid var(--green-dark);
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+}
+
+article pre {
+  background: rgba(0, 255, 65, 0.05);
+  border: 1px solid var(--green-dark);
+  padding: 1rem;
+  overflow-x: auto;
+  text-shadow: none;
+}
+
+article pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+article blockquote {
+  margin: 0 0 1.25rem;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 2px solid var(--green-dim);
+  color: var(--green-dim);
+}
+
+article ul, article ol { margin: 0 0 1.25rem; padding-left: 1.5rem; }
+article li { margin-bottom: 0.4rem; }
+
+article hr {
+  border: none;
+  border-top: 1px solid var(--green-dark);
+  margin: 2rem 0;
+}
+
+article img { max-width: 100%; }

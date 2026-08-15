@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog — Nishim Goyal</title>
+  <link rel="stylesheet" href="../assets/matrix.css">
+</head>
+<body>
+  <canvas id="rain"></canvas>
+
+  <main class="page">
+    <p><a class="back-link" href="../">&lt; back home</a></p>
+    <h1>Blog<span class="cursor"></span></h1>
+    <ul class="post-list" id="post-list"></ul>
+  </main>
+
+  <script src="../assets/rain.js"></script>
+  <script src="posts.js"></script>
+  <script>
+    const list = document.getElementById("post-list");
+    for (const post of POSTS) {
+      const li = document.createElement("li");
+      const date = document.createElement("span");
+      date.className = "post-date";
+      date.textContent = post.date;
+      const link = document.createElement("a");
+      link.href = "post.html?p=" + encodeURIComponent(post.slug);
+      link.textContent = post.title;
+      li.append(date, link);
+      list.appendChild(li);
+    }
+    if (POSTS.length === 0) {
+      list.innerHTML = "<li>nothing here yet...</li>";
+    }
+  </script>
+</body>
+</html>
